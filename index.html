@@ -6,7 +6,7 @@
 
   <meta name="title" content="Neuron-Level Emotion Control in Speech-Generative Large Audio-Language Models">
   <meta name="description" content="Anonymous audio demo page for a submission to Interspeech 2026, featuring abstract and paired speech samples across four target emotions.">
-  <meta name="keywords" content="speech processing, large audio-language models, emotion control, voice generation, anonymous demo">
+  <meta name="keywords" content="speech processing, large audio-language models, emotion control, voice generation">
   <meta name="author" content="Anonymous submission to Interspeech 2026">
   <meta name="robots" content="noindex, nofollow">
   <meta name="language" content="English">
@@ -14,8 +14,8 @@
 
   <title>Neuron-Level Emotion Control in Speech-Generative Large Audio-Language Models</title>
 
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico"> -->
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
@@ -112,7 +112,7 @@
             <h2 class="title is-3 has-text-centered">Abstract</h2>
             <div class="content has-text-justified abstract-box">
               <p>
-                INSERT_YOUR_ABSTRACT_HERE.
+                Large audio-language models (LALMs) can produce expressive speech, yet reliable emotion control remains elusive: conversions often miss the target affect and may degrade linguistic fidelity through refusals, hallucinations, or paraphrase. We present the first neuron-level study of emotion control in speech-generative LALMs and demonstrate that compact emotion-sensitive neurons (ESNs) are causally actionable, enabling training-free emotion steering at inference time. ESNs are identified via success-filtered activation aggregation enforcing both emotion realization and content preservation. Across three LALMs (Qwen2.5-Omni-7B, MiniCPM-o~4.5, Kimi-Audio), ESN interventions yield emotion-specific gains that generalize to unseen speakers and are supported by automatic and human evaluation. Controllability depends on selector design, mask sparsity, filtering, and intervention strength. Our results establish a mechanistic framework for training-free emotion control in speech generation.
               </p>
             </div>
           </div>
@@ -126,7 +126,7 @@
           <div class="column is-full">
             <h2 class="title is-3 has-text-centered">Speech Samples</h2>
             <p class="has-text-centered footer-note" style="margin-bottom: 2rem;">
-              Each example shows a paired comparison between the unmasked generation and the masked generation under the same source speech and instruction.
+              Each example shows a paired comparison between the unmasked generation and the masked generation (Qwen2.5-Omni-7B, CAS, r=0.5%, steering, alpha=1.0) under the same source speech and instruction.
             </p>
 
             <div class="emotion-block">
@@ -138,13 +138,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair1_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0011_000253_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair1_masked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0011_000253_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -155,13 +155,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair2_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0012_000295_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair2_masked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0012_000295_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -172,13 +172,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair3_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0013_000340_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair3_masked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0013_000340_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -189,13 +189,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair4_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0016_000254_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/angry/pair4_masked.wav" type="audio/wav">
+                        <source src="static/audio/angry/0016_000254_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -212,13 +212,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair1_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0011_000315_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair1_masked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0011_000315_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -229,13 +229,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair2_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0013_000268_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair2_masked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0013_000268_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -246,13 +246,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair3_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0015_000321_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair3_masked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0015_000321_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -263,13 +263,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair4_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0017_000262_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/happy/pair4_masked.wav" type="audio/wav">
+                        <source src="static/audio/happy/0017_000262_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -286,13 +286,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair1_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0011_000292_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair1_masked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0011_000292_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -303,13 +303,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair2_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0012_000328_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair2_masked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0012_000328_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -320,13 +320,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair3_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0013_000321_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair3_masked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0013_000321_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -337,13 +337,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair4_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0017_000338_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/sad/pair4_masked.wav" type="audio/wav">
+                        <source src="static/audio/sad/0017_000338_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -360,13 +360,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair1_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0013_000258_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair1_masked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0013_000258_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -377,13 +377,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair2_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0011_000322_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair2_masked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0011_000322_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -394,13 +394,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair3_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0017_000350_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair3_masked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0017_000350_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
@@ -411,13 +411,13 @@
                     <div class="audio-group">
                       <div class="audio-label">Unmasked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair4_unmasked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0019_000303_unmasked.wav" type="audio/wav">
                       </audio>
                     </div>
                     <div class="audio-group">
                       <div class="audio-label">Masked generation</div>
                       <audio controls preload="none">
-                        <source src="static/audio/surprised/pair4_masked.wav" type="audio/wav">
+                        <source src="static/audio/surprised/0019_000303_masked.wav" type="audio/wav">
                       </audio>
                     </div>
                   </div>
