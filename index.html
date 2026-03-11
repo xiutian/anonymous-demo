@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="title" content="Neuron-Level Emotion Control in Speech-Generative Large Audio-Language Models">
-  <meta name="description" content="Anonymous audio demo page for a submission to Interspeech 2026, featuring abstract and paired speech samples across four target emotions.">
-  <meta name="keywords" content="speech processing, large audio-language models, emotion control, voice generation">
+  <meta name="description" content="Anonymous audio demo page for a submission to Interspeech 2026, featuring abstract and speech samples across target emotions.">
+  <meta name="keywords" content="large audio-language models, speech, emotion, voice conversion, neuron attribution">
   <meta name="author" content="Anonymous submission to Interspeech 2026">
   <meta name="robots" content="noindex, nofollow">
   <meta name="language" content="English">
@@ -40,6 +40,29 @@
       background: #fafafa;
       border-radius: 12px;
       padding: 1.5rem;
+    }
+
+    .part-block {
+      margin-bottom: 2.5rem;
+      padding: 1.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .part-note {
+      margin-top: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding: 1rem 1.1rem;
+      background: #f9fafb;
+      border: 1px solid #eef2f7;
+      border-radius: 12px;
+      color: #374151;
+    }
+
+    .part-note p {
+      margin: 0;
     }
 
     .emotion-block {
@@ -105,20 +128,30 @@
       </div>
     </section>
 
-    <section class="section">
+    <!-- Paper abstract -->
+    <section class="section hero is-light" id="abstract">
       <div class="container is-max-desktop">
-        <div class="columns is-centered">
+        <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3 has-text-centered">Abstract</h2>
+            <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified abstract-box">
               <p>
-                Large audio-language models (LALMs) can produce expressive speech, yet reliable emotion control remains elusive: conversions often miss the target affect and may degrade linguistic fidelity through refusals, hallucinations, or paraphrase. We present the first neuron-level study of emotion control in speech-generative LALMs and demonstrate that compact emotion-sensitive neurons (ESNs) are causally actionable, enabling training-free emotion steering at inference time. ESNs are identified via success-filtered activation aggregation enforcing both emotion realization and content preservation. Across three LALMs (Qwen2.5-Omni-7B, MiniCPM-o~4.5, Kimi-Audio), ESN interventions yield emotion-specific gains that generalize to unseen speakers and are supported by automatic and human evaluation. Controllability depends on selector design, mask sparsity, filtering, and intervention strength. Our results establish a mechanistic framework for training-free emotion control in speech generation.
+                Large audio-language models (LALMs) can produce expressive speech, yet reliable emotion control remains elusive: 
+                conversions often miss the target affect and may degrade linguistic fidelity through refusals, hallucinations, or paraphrase. 
+                We present the first neuron-level study of emotion control in speech-generative LALMs and demonstrate that compact 
+                emotion-sensitive neurons (ESNs) are causally actionable, enabling training-free emotion steering at inference time. 
+                ESNs are identified via success-filtered activation aggregation enforcing both emotion realization and content preservation. 
+                Across three LALMs (Qwen2.5-Omni-7B, MiniCPM-o 4.5, Kimi-Audio), ESN interventions yield emotion-specific gains that 
+                generalize to unseen speakers and are supported by automatic and human evaluation. Controllability depends on selector design, 
+                mask sparsity, filtering, and intervention strength. Our results establish a mechanistic framework for training-free 
+                emotion control in speech generation.
               </p>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <!-- End paper abstract -->
 
     <section class="section">
       <div class="container is-max-desktop">
@@ -126,305 +159,143 @@
           <div class="column is-full">
             <h2 class="title is-3 has-text-centered">Speech Samples</h2>
             <p class="has-text-centered footer-note" style="margin-bottom: 2rem;">
-              Each example shows a paired comparison between the unmasked generation and the masked generation (Qwen2.5-Omni-7B, CAS, r=0.5%, steering, alpha=1.0) under the same source speech and instruction.
+              This demo complements the main paper by providing direct audio examples that illustrate the effects of
+              neuron-level intervention in speech-generative LALMs. Starting from a neutral source utterance, we instruct
+              the model to repeat the content faithfully while expressing a target emotion. We then compare the model's
+              original output with outputs obtained after intervening on a compact set of
+              <strong>emotion-sensitive neurons (ESNs)</strong>, identified from successful emotional voice conversion
+              examples using different selectors.
+            </p>
+            <p>
+              We include both successful cases and representative failure modes. The sections below present
+              (1) baseline-versus-intervened comparisons across identification methods, and
+              (2) comparisons across intervention strengths (<strong>&alpha;</strong>). For comparability, we keep the
+              model, top rate, success set size, and intervention method fixed throughout (Qwen2.5-Omni-7B, r = 0.5%, c=50, targeted steering).
             </p>
 
-            <div class="emotion-block">
-              <h3 class="title is-4">Angry</h3>
-              <div class="columns is-multiline">
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 1</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0012_000295_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0012_000295_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+            <!-- Part 1: 4 emotions x {baseline + 4 selectors} -->
+            <div class="part-block" id="part-identification">
+              <h3 class="title is-4">Part 1: Identification Methods (i.e., Neuron Selectors)</h3>
+              <div class="content part-note">
+                <p>
+                  This section compares four methods for identifying emotion-sensitive neurons:
+                  <strong>LAPE, LAP, MAD, and CAS</strong>. For each target emotion, we provide a <strong>group</strong> of
+                  five single samples: the <strong>baseline</strong> generation without intervention, followed by four
+                  <strong>intervened</strong> generations produced using ESNs identified by each selector under the same
+                  source speech and instruction.
+                </p>
+              </div>
+
+              <!-- Emotion: Angry -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Angry</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_lap.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_lape.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_mad.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 2</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0013_000316_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0013_000316_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+              </div>
+
+              <!-- Emotion: Happy -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Happy</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_lap.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_lape.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_mad.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 3</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0016_000254_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0016_000254_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+              </div>
+
+              <!-- Emotion: Sad -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Sad</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_lap.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_lape.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_mad.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 4</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0018_000279_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/angry/0018_000279_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+              </div>
+
+              <!-- Emotion: Surprise -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Surprise</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_lap.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_lape.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_mad.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
               </div>
             </div>
 
-            <div class="emotion-block">
-              <h3 class="title is-4">Happy</h3>
-              <div class="columns is-multiline">
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 1</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0013_000268_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0013_000268_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+
+
+            <!-- Part 2: 4 emotions x {baseline, &alpha;=0.5, &alpha;=1.0, &alpha;=2.0} -->
+            <div class="part-block" id="part-strength">
+              <h3 class="title is-4">Part 2: Intervention Strength &alpha;</h3>
+              <div class="content part-note">
+                <p>
+                  This section examines how the <strong>strength</strong> of the intervention changes the generated speech.
+                  For each emotion, we present four single samples: the <strong>baseline</strong> output, followed by outputs
+                  with <strong>&alpha; = 0.5</strong>, <strong>&alpha; = 1.0</strong>, and <strong>&alpha; = 2.0</strong>. Other settings are held constant (Qwen2.5-Omni-7B, r = 0.5%, c=50, selector: CAS).
+                  Here, <strong>&alpha;</strong> controls how strongly the identified emotion-sensitive neurons are steered
+                  at inference time. The expected pattern is a trade-off: increasing <strong>&alpha;</strong> can make the
+                  target emotion more pronounced, but overly strong intervention may also harm content preservation or
+                  introduce unnatural changes.
+                </p>
+              </div>
+
+              <!-- Emotion: Angry -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Angry</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/intensity/angry/0012_000295_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 0.5</div><audio controls preload="none"><source src="static/audio/intensity/angry/0012_000295_0p5.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 1.0</div><audio controls preload="none"><source src="static/audio/intensity/angry/0012_000295_1p0.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 2.0</div><audio controls preload="none"><source src="static/audio/intensity/angry/0012_000295_2p0.wav" type="audio/wav"></audio></div></div>
                 </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 2</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0017_000270_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0017_000270_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+              </div>
+
+              <!-- Emotion: Happy -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Happy</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/intensity/happy/0013_000268_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 0.5</div><audio controls preload="none"><source src="static/audio/intensity/happy/0013_000268_0p5.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 1.0</div><audio controls preload="none"><source src="static/audio/intensity/happy/0013_000268_1p0.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 2.0 (with hallucination content)</div><audio controls preload="none"><source src="static/audio/intensity/happy/0013_000268_2p0.wav" type="audio/wav"></audio></div></div>
                 </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 3</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0018_000298_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0018_000298_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+              </div>
+
+              <!-- Emotion: Sad -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Sad</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/intensity/sad/0020_000273_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 0.5</div><audio controls preload="none"><source src="static/audio/intensity/sad/0020_000273_0p5.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 1.0</div><audio controls preload="none"><source src="static/audio/intensity/sad/0020_000273_1p0.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 2.0</div><audio controls preload="none"><source src="static/audio/intensity/sad/0020_000273_2p0.wav" type="audio/wav"></audio></div></div>
                 </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 4</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0019_000340_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/happy/0019_000340_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
+              </div>
+
+              <!-- Emotion: Surprise -->
+              <div class="emotion-block">
+                <h4 class="title is-5">Surprise</h4>
+                <div class="columns is-multiline">
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Baseline (unintervened)</div><audio controls preload="none"><source src="static/audio/intensity/surprise/0013_000331_unmasked.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 0.5</div><audio controls preload="none"><source src="static/audio/intensity/surprise/0013_000331_0p5.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 1.0</div><audio controls preload="none"><source src="static/audio/intensity/surprise/0013_000331_1p0.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">&alpha; = 2.0</div><audio controls preload="none"><source src="static/audio/intensity/surprise/0013_000331_2p0.wav" type="audio/wav"></audio></div></div>
                 </div>
               </div>
             </div>
-
-            <div class="emotion-block">
-              <h3 class="title is-4">Sad</h3>
-              <div class="columns is-multiline">
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 1</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0020_000273_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0020_000273_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 2</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0012_000328_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0012_000328_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 3</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0013_000321_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0013_000321_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 4</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0017_000338_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/sad/0017_000338_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="emotion-block">
-              <h3 class="title is-4">Surprised</h3>
-              <div class="columns is-multiline">
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 1</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0013_000258_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0013_000258_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 2</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0012_000324_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0012_000324_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 3</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0013_000331_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0013_000331_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-                <div class="column is-half">
-                  <div class="clip-pair">
-                    <div class="clip-pair-title">Pair 4</div>
-                    <div class="audio-group">
-                      <div class="audio-label">Unmasked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0020_000261_unmasked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                    <div class="audio-group">
-                      <div class="audio-label">Masked generation</div>
-                      <audio controls preload="none">
-                        <source src="static/audio/surprised/0020_000261_masked.wav" type="audio/wav">
-                      </audio>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
