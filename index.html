@@ -7,7 +7,7 @@
   <meta name="title" content="Neuron-Level Emotion Control in Speech-Generative Large Audio-Language Models">
   <meta name="description" content="Anonymous audio demo page, featuring abstract and speech samples across target emotions.">
   <meta name="keywords" content="large audio-language models, speech, emotion, voice conversion, neuron attribution">
-  <meta name="author" content="Anonymous Submission">
+  <meta name="author" content="Anonymous ACL ARR Submission">
   <meta name="robots" content="noindex, nofollow">
   <meta name="language" content="English">
   <meta name="theme-color" content="#2563eb">
@@ -121,7 +121,7 @@
           <div class="columns is-centered">
             <div class="column has-text-centered">
               <h1 class="title is-2 publication-title">Neuron-Level Emotion Control in Speech-Generative Large Audio-Language Models</h1>
-              <p class="is-size-5 author-line">Anonymous Submission</p>
+              <p class="is-size-5 author-line">Anonymous ACL ARR Submission</p>
             </div>
           </div>
         </div>
@@ -136,10 +136,10 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified abstract-box">
               <p>
-                Large audio-language models (LALMs) can produce expressive speech, yet reliable emotion control remains elusive: 
+                Speech-generative large audio-language models (LALMs) can produce expressive speech, yet reliable emotion control remains elusive: 
                 conversions often miss the target affect and may degrade linguistic fidelity through refusals, hallucinations, or paraphrase. 
-                We present, to our knowledge, the first neuron-level study of emotional voice conversion (EVC) in LALMs and demonstrate that 
-                compact emotion-sensitive neurons (ESNs) are causally actionable, enabling training-free emotion steering at inference time.  
+                We present, to our knowledge, the first neuron-level study of emotional voice conversion (EVC) in LALMs and provide intervention-based 
+                evidence that compact emotion-sensitive neuron (ESN) sets can be used for training-free emotion steering at inference time. 
                 ESNs are identified via success-filtered activation aggregation enforcing both emotion realization and content preservation. 
                 Across three LALMs (Qwen2.5-Omni-7B, MiniCPM-o 4.5, Kimi-Audio), ESN interventions yield emotion-specific gains that generalize 
                 to unseen speakers and are supported by automatic and human evaluation. Controllability depends on selector design, mask sparsity, 
@@ -176,7 +176,7 @@
               <div class="content part-note">
                 <p>
                   This section compares four methods for identifying emotion-sensitive neurons:
-                  <strong>LAPE, LAP, MAD, and CAS</strong>. For each target emotion, we provide a <strong>group</strong> of
+                  <strong>LAPE, LAP, MAD, and ConAct</strong>. For each target emotion, we provide a <strong>group</strong> of
                   five single samples: the <strong>baseline</strong> generation without intervention, followed by four
                   <strong>intervened</strong> generations produced using ESNs identified by each selector under the same
                   source speech and instruction.
@@ -191,7 +191,7 @@
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_lap.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_lape.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_mad.wav" type="audio/wav"></audio></div></div>
-                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_cas.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: ConAct</div><audio controls preload="none"><source src="static/audio/selector/angry/0018_000279_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
               </div>
 
@@ -203,7 +203,7 @@
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_lap.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_lape.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_mad.wav" type="audio/wav"></audio></div></div>
-                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_cas.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: ConAct</div><audio controls preload="none"><source src="static/audio/selector/happy/0018_000298_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
               </div>
 
@@ -215,7 +215,7 @@
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_lap.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_lape.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_mad.wav" type="audio/wav"></audio></div></div>
-                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_cas.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: ConAct</div><audio controls preload="none"><source src="static/audio/selector/sad/0012_000328_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
               </div>
 
@@ -227,7 +227,7 @@
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAP</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_lap.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: LAPE</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_lape.wav" type="audio/wav"></audio></div></div>
                   <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: MAD</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_mad.wav" type="audio/wav"></audio></div></div>
-                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: CAS</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_cas.wav" type="audio/wav"></audio></div></div>
+                  <div class="column is-half"><div class="clip-pair"><div class="clip-pair-title">Selector: ConAct</div><audio controls preload="none"><source src="static/audio/selector/surprise/0013_000331_cas.wav" type="audio/wav"></audio></div></div>
                 </div>
               </div>
             </div>
@@ -241,7 +241,7 @@
                 <p>
                   This section examines how the <strong>strength</strong> of the intervention changes the generated speech.
                   For each emotion, we present four single samples: the <strong>baseline</strong> output, followed by outputs
-                  with <strong>&alpha; = 0.5</strong>, <strong>&alpha; = 1.0</strong>, and <strong>&alpha; = 2.0</strong>. Other settings are held constant (Qwen2.5-Omni-7B, r = 0.5%, c=50, selector: CAS).
+                  with <strong>&alpha; = 0.5</strong>, <strong>&alpha; = 1.0</strong>, and <strong>&alpha; = 2.0</strong>. Other settings are held constant (Qwen2.5-Omni-7B, r = 0.5%, c=50, selector: ConAct).
                   Here, <strong>&alpha;</strong> controls how strongly the identified emotion-sensitive neurons are steered
                   at inference time. The expected pattern is a trade-off: increasing <strong>&alpha;</strong> can make the
                   target emotion more pronounced, but overly strong intervention may also harm content preservation or
